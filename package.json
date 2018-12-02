@@ -1,0 +1,24 @@
+{
+  "name": "class06-fp-04",
+  "version": "1.0.0",
+  "description": "Calender app for hyf",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YousofMersal/Class06-FP-04.git"
+  },
+  "keywords": [
+    "Node",
+    "React",
+    "hackyourfuture"
+  ],
+  "author": "Yousof Mersal and Azizul Huq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YousofMersal/Class06-FP-04/issues"
+  },
+  "homepage": "https://github.com/YousofMersal/Class06-FP-04#readme"
+}
