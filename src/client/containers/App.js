@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { GetJsonFromApi } from './apiCalls'
-import MentorsList from './MentorsList'
+import { GetJsonFromApi } from '../apiCalls.jsx'
+import MentorsList from '../components/MentorsList'
 
 export default class App extends Component {
   //adding mentors in state for displaying it later
