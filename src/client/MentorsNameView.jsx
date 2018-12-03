@@ -4,8 +4,9 @@ export default class MentorsNameView extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.firstName} </p>
-        <p>{this.props.lastName} </p>
+        <p>
+          {this.props.firstName} {this.props.lastName}
+        </p>
       </div>
     )
   }
