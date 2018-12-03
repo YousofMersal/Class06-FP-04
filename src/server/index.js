@@ -11,9 +11,7 @@ app.use(express.static(buildPath))
 //path for responding to api call that won't interefere with react-router when implemented
 app.get('/api/mentors', (req, res) => {
   fs.readFile(mentorsFilePath, 'utf8', (err, data) => {
-    console.log(data)
     try {
-      console.log(data)
       res.send(data)
     } catch (error) {
       throw new Error(err)
