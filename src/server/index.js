@@ -15,7 +15,7 @@ app.get('/api/dbtest', (req, res) => {
   connection.connect()
 
   //Query to the database and send it back in the response to the client
-  connection.query('DESC mentors', (err, data, fields) => {
+  connection.query('SELECT * from mentors', (err, data, fields) => {
     if (err) {
       throw new Error()
     } else {
