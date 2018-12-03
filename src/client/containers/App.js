@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { GetJsonFromApi } from './apiCalls'
-import MentorsList from './MentorsList'
+import { getMentorsFromDb } from '../apiCalls.jsx'
+import MentorsList from '../components/MentorsList'
 
 export default class App extends Component {
   //adding mentors in state for displaying it later
@@ -13,7 +13,11 @@ export default class App extends Component {
 
   //fetch request to express backend
   componentDidMount() {
-    GetJsonFromApi().then(res => this.setState({ mentors: res }))
+    try {
+      getMentorsFromDb().then(res => this.setState({ mentors: res }))
+    } catch (err) {
+      throw new Error('something went wrong while getting the data. \n' + err)
+    }
   }
 
   render() {
