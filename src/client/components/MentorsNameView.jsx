@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class MentorsNameView extends Component {
   render() {
     return (
-      <div className="mentorview">
+      <div>
         <p>
           {this.props.firstName} {this.props.lastName}{' '}
           <span>
