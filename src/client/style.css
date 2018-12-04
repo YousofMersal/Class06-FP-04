@@ -1,0 +1,9 @@
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+.mentorview {
+  border: 2px solid #f0f0f0;
+  margin: 10px auto;
+}
