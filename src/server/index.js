@@ -3,13 +3,15 @@ const path = require('path')
 const fs = require('fs')
 const app = express()
 const mysql = require('mysql')
+const bodyParser = require('body-parser')
 const dbsettings = require('./dbsettings')
 const mentorsFilePath = path.join(__dirname, './api/Mentors.json')
 const buildPath = path.join(__dirname, '../../build')
-
+const port = process.env.PORT || 9001
+app.use(bodyParser.json())
 app.use(express.static(buildPath))
 
-app.get('/api/dbtest', (req, res) => {
+app.get('/api/getallmentors', (req, res) => {
   //creat connection to HerokuDB
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
@@ -25,6 +27,17 @@ app.get('/api/dbtest', (req, res) => {
 
   //disconecting so we don't create errors with the HerokuDB
   connection.end()
+})
+
+app.post('/api/creatementor', (req, res) => {
+  console.log(req.body)
+  res.send(req.body.data)
+  // const connection = mysql.createConnection(dbsettings.settings)
+  // connection.connect()
+
+  // connection.query(
+  //   'INSERT INTO mentors (first_name, last_name, bday, type, slack_nickname, admission_date,status) VALUES( ?, ?, ?, ?, ?, ?, ?), []'
+  // )
 })
 
 //path for responding to api call that won't interefere with react-router when implemented
@@ -44,6 +57,6 @@ app.get('/*', function(req, res) {
   res.sendFile(indexPath)
 })
 
-app.listen(process.env.PORT || 9001, () => {
-  console.log('Test')
+app.listen(port, () => {
+  console.log(`Calender App Is being served! on port ${port}`)
 })
