@@ -1,13 +1,20 @@
+import Axios from 'axios'
+
 async function getMentorsFromDb() {
-  try {
-    //this code runs every time it tried to make a request
-    const response = await fetch('/api/dbtest')
-    const body = await response.json()
-    return body
-  } catch (err) {
-    //this code runs only when an error happens.
+  //this code runs every time it tried to make a request
+  const response = await Axios.get('/api/getallmentors').catch(err => {
     throw new Error('Whoops, error in fetching data from api!' + err)
-  }
+  })
+  const body = await response.data
+  return body
 }
 
-export { getMentorsFromDb }
+async function postNewMentor(formdata) {
+  const response = await Axios.post('/api/creatementor', { formdata }).catch(err => {
+    throw new Error('Whoops, error in posting data from api!' + err)
+  })
+  const body = await response.data
+  return body
+}
+
+export { getMentorsFromDb, postNewMentor }
