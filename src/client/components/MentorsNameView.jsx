@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EditMentorForm from './EditMentorForm'
+import moment from 'moment'
 
 export default class MentorsNameView extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ export default class MentorsNameView extends Component {
         toggle={this.toggleEdit}
       />
     )
+    console.log(this.props.editData)
     return (
       <div>
         <p>
@@ -32,6 +34,16 @@ export default class MentorsNameView extends Component {
             <a href={this.props.slackNickname}>Link to GitHub</a>
           </span>{' '}
           {this.props.type} {this.props.status}
+        </p>
+        <p>
+          {this.props.editData.bday
+            ? moment(this.props.editData.bday).format('DD-MM-YYYY')
+            : null}
+        </p>
+        <p>
+          {this.props.editData.admission_date
+            ? moment(this.props.editData.admission_date).format('DD-MM-YYYY')
+            : null}
         </p>
         {this.state.isEdit ? editToggle : null}
         <button onClick={this.toggleEdit}>Edit me!</button>
