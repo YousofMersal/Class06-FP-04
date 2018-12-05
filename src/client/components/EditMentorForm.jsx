@@ -27,7 +27,6 @@ export default class EditMentorform extends Component {
       memberType: this.props.editData.type,
       status: this.props.editData.status
     }
-    console.log(this.props.editData)
   }
 
   handleClick = () => {
