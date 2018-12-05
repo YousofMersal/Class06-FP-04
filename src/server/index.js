@@ -3,13 +3,15 @@ const path = require('path')
 const fs = require('fs')
 const app = express()
 const mysql = require('mysql')
+const bodyParser = require('body-parser')
 const dbsettings = require('./dbsettings')
 const mentorsFilePath = path.join(__dirname, './api/Mentors.json')
 const buildPath = path.join(__dirname, '../../build')
-
+const port = process.env.PORT || 9001
+app.use(bodyParser.json())
 app.use(express.static(buildPath))
 
-app.get('/api/dbtest', (req, res) => {
+app.get('/api/getallmentors', (req, res) => {
   //creat connection to HerokuDB
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
@@ -24,6 +26,74 @@ app.get('/api/dbtest', (req, res) => {
   })
 
   //disconecting so we don't create errors with the HerokuDB
+  connection.end()
+})
+
+app.post('/api/updatementor', (req, res) => {
+  const connection = mysql.createConnection(dbsettings.settings)
+  connection.connect()
+  connection.query(
+    'UPDATE mentors SET first_name = ?, last_name = ?, bday = ?, type = ?, slack_nickname = ?, admission_date = ?, status = ? WHERE id= ?',
+    [
+      req.body.data.fName,
+      req.body.data.lName,
+      req.body.data.bDay,
+      req.body.data.memberType,
+      req.body.data.slackName,
+      req.body.data.admission_date,
+      req.body.data.status,
+      req.body.data.id
+    ],
+    (err, results, fields) => {
+      if (err) {
+        throw new Error('Whoops! Could not send data to database! \n' + err)
+      } else {
+        res.status(200).send(results)
+      }
+    }
+  )
+  connection.end()
+})
+
+app.post('/api/creatementor', (req, res) => {
+  const connection = mysql.createConnection(dbsettings.settings)
+  connection.connect()
+  connection.query(
+    'INSERT INTO mentors (first_name, last_name, bday, type, slack_nickname, admission_date, status) VALUES( ?, ?, ?, ?, ?, ?, ?)',
+    [
+      req.body.data.fName,
+      req.body.data.lName,
+      req.body.data.bDay,
+      req.body.data.memberType,
+      req.body.data.slackName,
+      req.body.data.admission_date,
+      req.body.data.status
+    ],
+    (err, results, fields) => {
+      if (err) {
+        throw new Error('Whoops! Could not send data to database! \n' + err)
+      } else {
+        res.status(200).send(results)
+      }
+    }
+  )
+  connection.end()
+})
+
+app.post('/api/deletementor', (req, res) => {
+  const connection = mysql.createConnection(dbsettings.settings)
+  connection.connect()
+  connection.query(
+    'DELETE FROM mentors WHERE id = (?)',
+    [req.body.id],
+    (err, results, fields) => {
+      if (err) {
+        throw new Error('Whoops! Could not send data to database! \n' + err)
+      } else {
+        res.status(200).send(results)
+      }
+    }
+  )
   connection.end()
 })
 
@@ -44,6 +114,6 @@ app.get('/*', function(req, res) {
   res.sendFile(indexPath)
 })
 
-app.listen(process.env.PORT || 9001, () => {
-  console.log('Test')
+app.listen(port, () => {
+  console.log(`Calender App Is being served! on port ${port}`)
 })
