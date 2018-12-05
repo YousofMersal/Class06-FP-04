@@ -14,17 +14,18 @@ export default class MentorsList extends Component {
     return (
       <ul className="MentorsList">
         <MentorForm update={this.props.update} />
-        {this.props.data.map(item => {
+        {this.props.data.map((item, i) => {
           return (
             <div className="mentorview" key={item.id}>
               <MentorsNameView
+                update={this.props.update}
                 firstName={item.first_name}
                 lastName={item.last_name}
                 slackNickname={item.slack_nickname}
                 type={item.type}
                 status={item.status}
+                editData={this.props.mentors[i]}
               />
-              <button>Edit me!</button>
               <button
                 onClick={() => {
                   deleteMentor(item.id)

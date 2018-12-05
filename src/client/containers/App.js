@@ -32,7 +32,11 @@ export default class App extends Component {
   render() {
     return (
       <div>
-        <MentorsList data={this.state.mentors} update={this.updateState} />
+        <MentorsList
+          data={this.state.mentors}
+          update={this.updateState}
+          mentors={this.state.mentors}
+        />
       </div>
     )
   }

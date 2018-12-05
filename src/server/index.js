@@ -29,6 +29,10 @@ app.get('/api/getallmentors', (req, res) => {
   connection.end()
 })
 
+app.post('/api/updatementor', (req, res) => {
+  console.log(req.body.data)
+})
+
 app.post('/api/creatementor', (req, res) => {
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
