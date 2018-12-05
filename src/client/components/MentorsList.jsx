@@ -18,6 +18,7 @@ export default class MentorsList extends Component {
           return (
             <div className="mentorview" key={item.id}>
               <MentorsNameView
+                id={item.id}
                 update={this.props.update}
                 firstName={item.first_name}
                 lastName={item.last_name}
