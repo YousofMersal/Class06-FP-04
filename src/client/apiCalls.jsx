@@ -48,4 +48,24 @@ async function deleteMentor(key) {
   return await response
 }
 
-export { getMentorsFromDb, postNewMentor, deleteMentor }
+async function updateMentor(params) {
+  const response = await Axios.post('/api/updatementor', { data: params }).catch(
+    err => {
+      if (err.response) {
+        console.log(err.response.data)
+        console.log(err.response.status)
+        console.log(err.response.headers)
+      } else if (err.request) {
+        throw new Error('Whoops something went wring while POSTing!: ' + err.request)
+      } else {
+        throw new Error(
+          'Whoops something went wring while POSTing!: ' + err.response
+        )
+      }
+      console.log(err.config)
+    }
+  )
+  return await response
+}
+
+export { getMentorsFromDb, postNewMentor, deleteMentor, updateMentor }
