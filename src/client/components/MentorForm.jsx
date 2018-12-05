@@ -28,7 +28,7 @@ export default class MentorForm extends Component {
   handleClick = () => {
     setTimeout(() => {
       this.props.update()
-    }, 50)
+    }, 100)
   }
 
   handlebDayChange = (bDaySelectedDay, modifiers, dayPickerInput) => {
@@ -84,6 +84,20 @@ export default class MentorForm extends Component {
       this.state.memberType
     ) {
       postNewMentor(formData)
+      this.setState({
+        bDaySelectedDay: undefined,
+        isEmpty: true,
+        isDisabled: false,
+        admissionSelectedDay: undefined,
+        admissionIsEmpty: true,
+        admissionIsDisabled: false,
+        locale: 'en-gb',
+        fName: '',
+        lName: '',
+        slackName: '',
+        memberType: '',
+        status: 'Active'
+      })
     } else {
       alert('You need to fill the obligatory fields!')
     }
@@ -97,28 +111,28 @@ export default class MentorForm extends Component {
             placeholder="First Name"
             type="text"
             name="fName"
-            value={this.fName}
+            value={this.state.fName}
             onChange={this.handleInput}
           />
           <input
             placeholder="Last Name"
             type="text"
             name="lName"
-            value={this.lName}
+            value={this.state.lName}
             onChange={this.handleInput}
           />
           <input
             placeholder="Member Type"
             type="text"
             name="memberType"
-            value={this.memberType}
+            value={this.state.memberType}
             onChange={this.handleInput}
           />
           <input
             placeholder="GitHub Link Name"
             type="url"
             name="slackName"
-            value={this.slackName}
+            value={this.state.slackName}
             onChange={this.handleInput}
           />
           <label htmlFor="status">Status:</label>
@@ -160,16 +174,11 @@ export default class MentorForm extends Component {
               selectedDays: this.state.admissionSelectedDay
             }}
           />
-          {/* <input
-            type="submit"
-            value="Create Member!"
-            onClick={() => this.handleClick()}
-          /> */}
           <button
             type="submit"
             value="Create Member!"
             onClick={() => this.handleClick()}>
-            Delete me!
+            Create Member!
           </button>
         </form>
       </div>
