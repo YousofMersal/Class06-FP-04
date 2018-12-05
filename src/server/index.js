@@ -33,12 +33,14 @@ app.post('/api/creatementor', (req, res) => {
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
   connection.query(
-    'INSERT INTO mentors (first_name, last_name, type, slack_nickname, status) VALUES( ?, ?, ?, ?, ?)',
+    'INSERT INTO mentors (first_name, last_name, bday, type, slack_nickname, admission_date, status) VALUES( ?, ?, ?, ?, ?, ?, ?)',
     [
       req.body.data.fName,
       req.body.data.lName,
+      req.body.data.bDay,
       req.body.data.memberType,
       req.body.data.slackName,
+      req.body.data.admission_date,
       req.body.data.status
     ],
     (err, results, fields) => {
