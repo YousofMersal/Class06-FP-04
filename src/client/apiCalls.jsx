@@ -29,12 +29,11 @@ async function postNewMentor(params) {
       console.log(err.config)
     }
   )
-  alert('successfully added mentor!')
   return await response
 }
 
-async function deleteMentor(id) {
-  const response = await Axios.post('/api/deletementor', { id: id }).catch(err => {
+async function deleteMentor(key) {
+  const response = await Axios.post('/api/deletementor', { id: key }).catch(err => {
     if (err.response) {
       console.log(err.response.data)
       console.log(err.response.status)
