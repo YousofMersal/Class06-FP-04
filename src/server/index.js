@@ -47,7 +47,7 @@ app.post('/api/creatementor', (req, res) => {
       if (err) {
         throw new Error('Whoops! Could not send data to database! \n' + err)
       } else {
-        res.sendStatus(200)
+        res.status(200).send(results)
       }
     }
   )
