@@ -1,20 +1,42 @@
 import React, { Component } from 'react'
+import MentorForm from './MentorForm'
 import MentorsNameView from './MentorsNameView'
+import { deleteMentor } from '../apiCalls'
 
 export default class MentorsList extends Component {
+  handleClick = () => {
+    setTimeout(() => {
+      this.props.update()
+    }, 100)
+  }
+
   render() {
     return (
       <ul className="MentorsList">
-        {this.props.data.map(item => (
-          <MentorsNameView
-            firstName={item.first_name}
-            lastName={item.last_name}
-            slackNickname={item.slack_nickname}
-            type={item.type}
-            status={item.status}
-            key={item.id}
-          />
-        ))}
+        <MentorForm update={this.props.update} />
+        {this.props.data.map((item, i) => {
+          return (
+            <div className="mentorview" key={item.id}>
+              <MentorsNameView
+                id={item.id}
+                update={this.props.update}
+                firstName={item.first_name}
+                lastName={item.last_name}
+                slackNickname={item.slack_nickname}
+                type={item.type}
+                status={item.status}
+                editData={this.props.mentors[i]}
+              />
+              <button
+                onClick={() => {
+                  deleteMentor(item.id)
+                  this.handleClick()
+                }}>
+                Delete me!
+              </button>
+            </div>
+          )
+        })}
       </ul>
     )
   }
