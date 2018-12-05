@@ -52,6 +52,23 @@ app.post('/api/creatementor', (req, res) => {
   connection.end()
 })
 
+app.post('/api/deletementor', (req, res) => {
+  // const connection = mysql.createConnection(dbsettings.settings)
+  // connection.connect()
+  // connection.query(
+  //   'DELETE FROM mentors WHERE id = (key) VALUES(?)',
+  //   [req.body.data],
+  //   (err, results, fields) => {
+  //     if (err) {
+  //       throw new Error('Whoops! Could not send data to database! \n' + err)
+  //     } else {
+  //       res.status(200).send(results)
+  //     }
+  //   }
+  // )
+  // connection.end()
+})
+
 //path for responding to api call that won't interefere with react-router when implemented
 app.get('/api/mentors', (req, res) => {
   fs.readFile(mentorsFilePath, 'utf8', (err, data) => {
