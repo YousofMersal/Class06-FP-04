@@ -33,15 +33,13 @@ app.post('/api/creatementor', (req, res) => {
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
   connection.query(
-    'INSERT INTO mentors (first_name, last_name, bday, type, slack_nickname, admission_date, status) VALUES( ?, ?, ?, ?, ?, ?, ?)',
+    'INSERT INTO mentors (first_name, last_name, type, slack_nickname, status) VALUES( ?, ?, ?, ?, ?)',
     [
       req.body.data.fName,
       req.body.data.lName,
-      req.body.data.bDay,
-      req.body.type,
-      req.body.slackName,
-      req.body.admissionDate,
-      req.body.status
+      req.body.data.memberType,
+      req.body.data.slackName,
+      req.body.data.status
     ],
     (err, results, fields) => {
       if (err) {
@@ -51,6 +49,7 @@ app.post('/api/creatementor', (req, res) => {
       }
     }
   )
+  connection.end()
 })
 
 //path for responding to api call that won't interefere with react-router when implemented

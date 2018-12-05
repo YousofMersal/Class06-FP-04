@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { postNewMentor } from '../apiCalls'
-import DayPickerInput from 'react-day-picker/DayPickerInput'
-import 'react-day-picker/lib/style.css'
 
 export default class MentorForm extends Component {
   constructor(props) {
@@ -10,28 +8,8 @@ export default class MentorForm extends Component {
       fName: '',
       lName: '',
       slackName: '',
-      bDay: '',
-      type: '',
-      admissionDate: '',
+      memberType: '',
       status: 'Active'
-    }
-    this.handleAdmissionDay = this.handleAdmissionDay.bind(this)
-    this.handleBday = this.handleBday.bind(this)
-  }
-
-  handleAdmissionDay(day) {
-    if (day === undefined) {
-      this.setState({ admissionDate: '' })
-    } else {
-      this.setState({ admissionDate: day.toLocaleDateString('da-DK') })
-    }
-  }
-
-  handleBday(day) {
-    if (day === undefined) {
-      this.setState({ bday: '' })
-    } else {
-      this.setState({ bDay: day.toLocaleDateString('da-DK') })
     }
   }
 
@@ -46,9 +24,7 @@ export default class MentorForm extends Component {
       fName: this.state.fName,
       lName: this.state.lName,
       slackName: this.state.slackName,
-      bDay: this.state.bDay,
-      type: this.state.type,
-      admissionDate: this.state.admissionDate,
+      memberType: this.state.memberType,
       status: this.state.status
     }
 
@@ -56,7 +32,7 @@ export default class MentorForm extends Component {
       this.state.fName &&
       this.state.lName &&
       this.state.slackName &&
-      this.state.type
+      this.state.memberType
     ) {
       postNewMentor(formData)
     } else {
@@ -82,18 +58,11 @@ export default class MentorForm extends Component {
             value={this.lName}
             onChange={this.handleInput}
           />
-          <label htmlFor="bday">Birthday (optional)</label>
-          <DayPickerInput
-            locale="dk"
-            value={this.state.bDay}
-            name="bday"
-            onDayChange={day => this.handleBday(day)}
-          />
           <input
-            placeholder="type"
+            placeholder="Member Type"
             type="text"
-            name="Type"
-            value={this.type}
+            name="memberType"
+            value={this.memberType}
             onChange={this.handleInput}
           />
           <input
@@ -102,13 +71,6 @@ export default class MentorForm extends Component {
             name="slackName"
             value={this.slackName}
             onChange={this.handleInput}
-          />
-          <label htmlFor="admissionDate">Admission Date (optional)</label>
-          <DayPickerInput
-            locale="dk"
-            value={this.state.admissionDate}
-            name="admissionDate"
-            onDayChange={day => this.handleAdmissionDay(day)}
           />
           <label htmlFor="status">Status:</label>
 
