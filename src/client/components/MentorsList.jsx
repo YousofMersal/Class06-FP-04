@@ -17,6 +17,7 @@ export default class MentorsList extends Component {
               status={item.status}
             />
             <button>Edit me!</button>
+            <button>Delete me!</button>
           </div>
         ))}
       </ul>
