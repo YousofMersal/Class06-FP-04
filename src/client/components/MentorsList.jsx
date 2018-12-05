@@ -5,7 +5,9 @@ import { deleteMentor } from '../apiCalls'
 
 export default class MentorsList extends Component {
   handleClick = () => {
-    this.props.update()
+    setTimeout(() => {
+      this.props.update()
+    }, 100)
   }
 
   render() {
