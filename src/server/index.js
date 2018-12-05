@@ -30,7 +30,29 @@ app.get('/api/getallmentors', (req, res) => {
 })
 
 app.post('/api/updatementor', (req, res) => {
-  console.log(req.body.data)
+  const connection = mysql.createConnection(dbsettings.settings)
+  connection.connect()
+  connection.query(
+    'UPDATE mentors SET first_name = ?, last_name = ?, bday = ?, type = ?, slack_nickname = ?, admission_date = ?, status = ? WHERE id= ?',
+    [
+      req.body.data.fName,
+      req.body.data.lName,
+      req.body.data.bDay,
+      req.body.data.memberType,
+      req.body.data.slackName,
+      req.body.data.admission_date,
+      req.body.data.status,
+      req.body.data.id
+    ],
+    (err, results, fields) => {
+      if (err) {
+        throw new Error('Whoops! Could not send data to database! \n' + err)
+      } else {
+        res.status(200).send(results)
+      }
+    }
+  )
+  connection.end()
 })
 
 app.post('/api/creatementor', (req, res) => {

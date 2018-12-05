@@ -18,6 +18,7 @@ export default class MentorsNameView extends Component {
   render() {
     const editToggle = (
       <EditMentorForm
+        id={this.props.id}
         editData={this.props.editData}
         update={this.props.update}
         toggle={this.toggleEdit}

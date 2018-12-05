@@ -61,17 +61,23 @@ export default class EditMentorform extends Component {
 
   onSubmit = e => {
     e.preventDefault()
+
     const formData = {
+      id: this.props.id,
       fName: this.state.fName,
       lName: this.state.lName,
       bDay:
-        this.state.bDaySelectedDay === undefined ? null : this.state.bDaySelectedDay,
+        this.state.bDaySelectedDay === undefined
+          ? null
+          : moment(this.state.bDaySelectedDay, 'DD-MM-YYYY').format('YYYY-MM-DD'),
       slackName: this.state.slackName,
       memberType: this.state.memberType,
       admission_date:
         this.state.admissionSelectedDay === undefined
           ? null
-          : this.state.admissionSelectedDay,
+          : moment(this.state.admissionSelectedDay, 'DD-MM-YYYY').format(
+              'YYYY-MM-DD'
+            ),
       status: this.state.status
     }
 
