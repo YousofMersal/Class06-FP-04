@@ -25,6 +25,12 @@ export default class MentorForm extends Component {
     }
   }
 
+  handleClick = () => {
+    setTimeout(() => {
+      this.props.update()
+    }, 50)
+  }
+
   handlebDayChange = (bDaySelectedDay, modifiers, dayPickerInput) => {
     const input = dayPickerInput.getInput()
     this.setState({
@@ -154,7 +160,17 @@ export default class MentorForm extends Component {
               selectedDays: this.state.admissionSelectedDay
             }}
           />
-          <input type="submit" value="Create Member!" />
+          {/* <input
+            type="submit"
+            value="Create Member!"
+            onClick={() => this.handleClick()}
+          /> */}
+          <button
+            type="submit"
+            value="Create Member!"
+            onClick={() => this.handleClick()}>
+            Delete me!
+          </button>
         </form>
       </div>
     )
