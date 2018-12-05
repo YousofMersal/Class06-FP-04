@@ -30,14 +30,27 @@ app.get('/api/getallmentors', (req, res) => {
 })
 
 app.post('/api/creatementor', (req, res) => {
-  console.log(req.body)
-  res.send(req.body.data)
-  // const connection = mysql.createConnection(dbsettings.settings)
-  // connection.connect()
-
-  // connection.query(
-  //   'INSERT INTO mentors (first_name, last_name, bday, type, slack_nickname, admission_date,status) VALUES( ?, ?, ?, ?, ?, ?, ?), []'
-  // )
+  const connection = mysql.createConnection(dbsettings.settings)
+  connection.connect()
+  connection.query(
+    'INSERT INTO mentors (first_name, last_name, bday, type, slack_nickname, admission_date, status) VALUES( ?, ?, ?, ?, ?, ?, ?)',
+    [
+      req.body.data.fName,
+      req.body.data.lName,
+      req.body.data.bDay,
+      req.body.type,
+      req.body.slackName,
+      req.body.admissionDate,
+      req.body.status
+    ],
+    (err, results, fields) => {
+      if (err) {
+        throw new Error('Whoops! Could not send data to database! \n' + err)
+      } else {
+        res.sendStatus(200)
+      }
+    }
+  )
 })
 
 //path for responding to api call that won't interefere with react-router when implemented
