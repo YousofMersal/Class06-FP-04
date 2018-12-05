@@ -25,7 +25,6 @@ export default class MentorsNameView extends Component {
         toggle={this.toggleEdit}
       />
     )
-    console.log(this.props.editData)
     return (
       <div>
         <p>
