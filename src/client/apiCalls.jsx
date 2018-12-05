@@ -29,6 +29,7 @@ async function postNewMentor(params) {
       console.log(err.config)
     }
   )
+  alert('successfully added mentor!')
   return await response
 }
 
