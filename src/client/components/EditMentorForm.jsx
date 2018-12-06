@@ -9,7 +9,11 @@ import 'moment/locale/en-gb'
 export default class EditMentorform extends Component {
   constructor(props) {
     super(props)
+    //state holds form data so it can be passed around
     this.state = {
+      //date input checked if filled or not. if it's filled correctly,
+      //it's formated so satabase can handle it.
+      // If it's filled incorrectly or left empty it's made into null so database can write null.
       bDaySelectedDay: this.props.editData.bday
         ? moment(this.props.editData.bday).format('DD-MM-YYYY')
         : undefined,
@@ -21,6 +25,8 @@ export default class EditMentorform extends Component {
       admissionIsEmpty: true,
       admissionIsDisabled: false,
       locale: 'en-gb',
+      //these forms take data from the top-level state, filtered to be the right
+      //entry by map function in MentorList.jsx
       fName: this.props.editData.first_name,
       lName: this.props.editData.last_name,
       slackName: this.props.editData.slack_nickname,
@@ -29,6 +35,7 @@ export default class EditMentorform extends Component {
     }
   }
 
+  //Set delay on update to make sure that top-level state has fetched data before forcing a re-render.
   handleClick = () => {
     setTimeout(() => {
       this.props.update()
@@ -61,10 +68,13 @@ export default class EditMentorform extends Component {
   onSubmit = e => {
     e.preventDefault()
 
+    //set state data into a variable to be able to easielier handle it,
+    //and in the future possibly maybe help keeping the code DRY.
     const formData = {
       id: this.props.id,
       fName: this.state.fName,
       lName: this.state.lName,
+      //another check if data is correct
       bDay:
         this.state.bDaySelectedDay === undefined
           ? null
@@ -79,13 +89,14 @@ export default class EditMentorform extends Component {
             ),
       status: this.state.status
     }
-
+    // make sure that obligatory fields are filled.
     if (
       this.state.fName &&
       this.state.lName &&
       this.state.slackName &&
       this.state.memberType
     ) {
+      //execute asyncronous call to POST data to api.
       updateMentor(formData)
       this.setState({
         bDaySelectedDay: undefined,

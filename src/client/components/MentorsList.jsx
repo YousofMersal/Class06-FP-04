@@ -14,8 +14,11 @@ export default class MentorsList extends Component {
     return (
       <ul className="MentorsList">
         <MentorForm update={this.props.update} />
+        {/* maps out however many entried into their own component with relevant data. */}
         {this.props.data.map((item, i) => {
           return (
+            //key is set in the overall div rather than the component to make sure everything is handled as a group
+            //as supposed to having non-key'd elements floating around. This could save performance in the long haul, or it could do nothing.
             <div className="mentorview" key={item.id}>
               <MentorsNameView
                 id={item.id}
