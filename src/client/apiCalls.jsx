@@ -32,6 +32,9 @@ async function postNewMentor(params) {
   return await response
 }
 
+//almost the exact same as postNewMentor but only sends 1 peice of data.
+//The id of the element to be deleted from the database.
+
 async function deleteMentor(key) {
   const response = await Axios.post('/api/deletementor', { id: key }).catch(err => {
     if (err.response) {
@@ -48,6 +51,7 @@ async function deleteMentor(key) {
   return await response
 }
 
+//very similair to postNewMentor
 async function updateMentor(params) {
   const response = await Axios.post('/api/updatementor', { data: params }).catch(
     err => {

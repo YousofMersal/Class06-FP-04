@@ -12,6 +12,8 @@ export default class App extends Component {
     this.updateState = this.updateState.bind(this)
   }
 
+  //function to be passed to and called in child components to update state when relevant.
+  //It calls the api and it then fetches all the entries in the db.
   updateState() {
     try {
       getMentorsFromDb().then(res => this.setState({ mentors: res }))

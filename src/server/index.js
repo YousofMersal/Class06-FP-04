@@ -29,6 +29,9 @@ app.get('/api/getallmentors', (req, res) => {
   connection.end()
 })
 
+//Sends all the data from the edit form to the database and replaces it all.
+//i diden't know how to only update the relevant data. Will optimize in the future.
+//placeholders on all data from the client to correctly escape them to avoid SQLinjection attacks.
 app.post('/api/updatementor', (req, res) => {
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
@@ -55,6 +58,7 @@ app.post('/api/updatementor', (req, res) => {
   connection.end()
 })
 
+//Sends all the data from the create form to the database, and escapes all data from the client.
 app.post('/api/creatementor', (req, res) => {
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()
@@ -80,6 +84,7 @@ app.post('/api/creatementor', (req, res) => {
   connection.end()
 })
 
+//Hands off the id of the entry to be deleted.
 app.post('/api/deletementor', (req, res) => {
   const connection = mysql.createConnection(dbsettings.settings)
   connection.connect()

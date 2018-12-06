@@ -3,6 +3,7 @@ ul {
   list-style-type: none;
 }
 
+/* a little bit of style to be able to differentiate the entries */
 .mentorview {
   border: 2px solid #f0f0f0;
   margin: 10px auto;

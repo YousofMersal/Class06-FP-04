@@ -25,12 +25,14 @@ export default class MentorForm extends Component {
     }
   }
 
+  //Set delay on update to make sure that top-level state has fetched data before forcing a re-render.
   handleClick = () => {
     setTimeout(() => {
       this.props.update()
     }, 100)
   }
 
+  //handle date picker input and the GUI for selecting the date
   handlebDayChange = (bDaySelectedDay, modifiers, dayPickerInput) => {
     const input = dayPickerInput.getInput()
     this.setState({
@@ -49,10 +51,13 @@ export default class MentorForm extends Component {
     })
   }
 
+  //"universal" input change handler
   handleInput = e => {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  //set state data into a variable to be able to easielier handle it,
+  //and in the future possibly maybe help keeping the code DRY.
   onSubmit = e => {
     e.preventDefault()
     const formData = {
@@ -77,12 +82,14 @@ export default class MentorForm extends Component {
       status: this.state.status
     }
 
+    //checks if all obligatory fields are filled
     if (
       this.state.fName &&
       this.state.lName &&
       this.state.slackName &&
       this.state.memberType
     ) {
+      //execute asyncronous call to POST data to api. And clears inputs so a new entry can be added.
       postNewMentor(formData)
       this.setState({
         bDaySelectedDay: undefined,
