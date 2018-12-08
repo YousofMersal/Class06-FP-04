@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
@@ -105,6 +107,7 @@ app.post('/api/deletementor', (req, res) => {
 //path for responding to api call that won't interefere with react-router when implemented
 app.get('/api/mentors', (req, res) => {
   fs.readFile(mentorsFilePath, 'utf8', (err, data) => {
+ 
     try {
       res.send(data)
     } catch (error) {
