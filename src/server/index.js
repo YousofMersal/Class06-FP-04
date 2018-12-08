@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config()
 
 const express = require('express')
 const path = require('path')
@@ -6,7 +6,7 @@ const fs = require('fs')
 const app = express()
 const mysql = require('mysql')
 const bodyParser = require('body-parser')
-const dbsettings = require('./dbsettings')
+const dbsettings = require('./settings')
 const mentorsFilePath = path.join(__dirname, './api/Mentors.json')
 const buildPath = path.join(__dirname, '../../build')
 const port = process.env.PORT || 9001
@@ -107,7 +107,6 @@ app.post('/api/deletementor', (req, res) => {
 //path for responding to api call that won't interefere with react-router when implemented
 app.get('/api/mentors', (req, res) => {
   fs.readFile(mentorsFilePath, 'utf8', (err, data) => {
- 
     try {
       res.send(data)
     } catch (error) {
